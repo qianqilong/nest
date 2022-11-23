@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql" //数据库类型
+  url      = env("DATABASE_URL")
+}
+
+model user{ // 用户信息
+  // 名 整数 主键 默认值(自增) 非负的
+  id BigInt @id @default(autoincrement()) @db.UnsignedBigInt
+  email String
+  password String 
+  avatar String ?
+  github String ?
+  douyin String ?
+  weibo String ?
+  waketime String ?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt // 自动维护
+}
+
+model category{ // 分类
+  id BigInt @id @default(autoincrement()) @db.UnsignedBigInt
+  title String // 标题
+  articles article[]
+}
+
+model article{ // 文章
+   id BigInt @id @default(autoincrement()) @db.UnsignedBigInt
+   title String // 文章名
+   content String @db.Text // 内容
+   thumb String 
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt // 自动维护
+   //类型category	关联定义(本表字段catgoryId,关联category表id,主表记录删除时同时删除关联表数据）
+   category category? @relation(fields: [categoryId],references:[id],onDelete:Cascade )
+   categoryId BigInt @db.UnsignedBigInt
+}

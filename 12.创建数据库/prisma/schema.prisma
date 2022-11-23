@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// 用户
+model user {
+  // 名 整数 主键 默认值(自增) 非负的
+  id       Int      @id @default(autoincrement()) @db.UnsignedInt
+  username String   @default("admin") //用户名 
+  realName String? //真实姓名
+  password String  @default("123456") //用户密码
+  gender   Int? //性别：1 女  2 男
+  birthday DateTime @default(now()) //生日
+  userType Int? //1管理员  2经理  3普通用户
+}
+
+// 账单
+model bill {
+  bid      Int      @id @default(autoincrement()) @db.UnsignedInt
+  // 账单编码
+  billCode String?
+  // 商品名称
+  billName String?
+  // 商品单位
+  billCom  String?
+  // 商品数量
+  billNum  Int?
+  // 总金额
+  money    Float?
+  // 是否付款 0 未付款， 1已付款
+  pay      Int?
+  // 创建时间
+  Date     DateTime @default(now())
+  // 供应商
+  provider    provider? @relation(fields: [pid], references: [pid])
+  //供应商id
+  pid Int?   @db.UnsignedInt
+}
+
+model provider {
+  pid          Int      @id @default(autoincrement()) @db.UnsignedInt
+  //供应商编码
+  providerCode String?
+  //供应商名称
+  providerName String
+  //联系人
+  people       String?
+  //联系电话
+  phone        String?
+  //联系地址
+  address      String?
+  //传真
+  fax          String?
+  //描述
+  describe     String?
+  // 创建时间
+  createDate   DateTime @default(now())
+  bill         bill[]
+}

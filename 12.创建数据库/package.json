@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "@prisma/client": "^4.5.0",
+    "argon2": "^0.30.1",
+    "mockjs": "^1.1.0",
+    "prisma-binding": "^2.3.16"
+  },
+  "devDependencies": {
+    "@types/mockjs": "^1.0.7",
+    "@types/node": "^18.11.8",
+    "prisma": "^4.5.0",
+    "typescript": "^4.8.4"
+  }
+}

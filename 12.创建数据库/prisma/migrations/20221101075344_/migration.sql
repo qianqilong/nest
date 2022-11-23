@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE `user` MODIFY `username` VARCHAR(191) NOT NULL DEFAULT 'admin',
+    MODIFY `password` VARCHAR(191) NOT NULL DEFAULT '123456';
