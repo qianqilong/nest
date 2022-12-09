@@ -29,7 +29,8 @@ nest g [文件类型][文件名] [文件目录（src目录下）] --no-spec
   "trailingComma": "all",
   "useTabs": false,
   "vueIndentScriptAndStyle": false,
-  "singleAttributePerLine": false
+  "singleAttributePerLine": false,
+ "endOfLine": "auto"
 }
 ```
 6. nestjs的生命周期
@@ -1002,7 +1003,7 @@ export class AppController {
     private readonly appService: AppService,
     private readonly config: ConfigService,
     @Inject(appConfig.KEY)
-    private app: ConfigType<typeof appConfig>
+    public app: ConfigType<typeof appConfig>
   ) {}
 
   @Get() // 子级路由
